@@ -1,21 +1,10 @@
-function Main() {
-  const handleEditAvatarClick = () => {
-    document.querySelector(".popup_type_avatar").classList.add("popup_opened");
-  };
-  const handleEditProfileClick = () => {
-    document.querySelector(".popup_type_edit").classList.add("popup_opened");
-  };
-  const handleAddPlaceClick = () => {
-    document
-      .querySelector(".popup_type_new-card")
-      .classList.add("popup_opened");
-  };
-
+function Main(props) {
+  console.log(props);
   return (
     <main className="content">
       <section className="profile">
         <div className="profile__person">
-          <button className="profile__avatar" onClick={handleEditAvatarClick}>
+          <button className="profile__avatar" onClick={props.onEditAvatar}>
             <img src="" alt="avatar" className="profile__avatar-img" />
           </button>
           <div className="profile__info">
@@ -24,7 +13,7 @@ function Main() {
               className="profile__edit"
               type="button"
               aria-label="Кнопка редактирования профиля"
-              onClick={handleEditProfileClick}
+              onClick={props.onEditProfile}
             ></button>
             <p className="profile__job"></p>
           </div>
@@ -33,7 +22,7 @@ function Main() {
           className="profile__add-item"
           type="button"
           aria-label="Кнопка добавление карточки"
-          onClick={handleAddPlaceClick}
+          onClick={props.onAddPlace}
         ></button>
       </section>
       <section className="elements"></section>
