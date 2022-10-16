@@ -1,10 +1,10 @@
 import PopupWithForm from "./PopupWithForm";
 
-function PopupEditProfile(props) {
+function PopupEditProfile({ isOpen, onClose, title }) {
   return (
-    <PopupWithForm isOpen={props.isOpen}>
+    <PopupWithForm isOpen={isOpen} onClose={onClose}>
       <fieldset className="popup__input-container">
-        <legend className="popup__title">{props.title}</legend>
+        <legend className="popup__title">{title}</legend>
         <label className="popup__label">
           <input
             type="text"

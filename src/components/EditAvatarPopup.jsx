@@ -1,8 +1,8 @@
 import PopupWithForm from "./PopupWithForm";
 
-function EditProfileAvatar(props) {
+function EditProfileAvatar({ isOpen, onClose }) {
   return (
-    <PopupWithForm isOpen={props.isOpen}>
+    <PopupWithForm isOpen={isOpen} onClose={onClose}>
       <fieldset className="popup__input-container">
         <legend className="popup__title">Обновить аватар</legend>
 

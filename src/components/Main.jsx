@@ -1,5 +1,4 @@
 function Main(props) {
-  console.log(props);
   return (
     <main className="content">
       <section className="profile">

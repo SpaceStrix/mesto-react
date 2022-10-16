@@ -1,25 +1,19 @@
-function PopupWithForm(props) {
-  // только текст заголовка
-  // идентификатор формы (в виде строк)
-
+function PopupWithForm({ name, isOpen, onClose, children }) {
   return (
-    <div
-      className={`popup popup_type_${props.name} ${
-        props.isOpen ? "popup_opened" : ""
-      }`}
-    >
+    <div className={`popup popup_type_${name} ${isOpen ? "popup_opened" : ""}`}>
       <div className="popup__container">
         <button
           className="popup__close"
           aria-label="Кнопка закрытия попапа"
           type="button"
+          onClick={onClose}
         />
         <form
           className="popup__form"
-          name={`popup__form-${props.name}`}
+          name={`popup__form-${name}`}
           noValidate=""
         >
-          {props.children}
+          {children}
 
           <button type="submit" className="popup__btn-safe">
             Сохранить
