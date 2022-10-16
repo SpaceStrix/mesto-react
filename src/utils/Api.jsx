@@ -1,3 +1,5 @@
+import { configApi } from "./constants";
+
 class Api {
   #onResponse(response) {
     if (response.ok) {
@@ -88,3 +90,6 @@ class Api {
     return Promise.all([this.getAllCard(), this.getUserInfoFromServer()]);
   }
 }
+
+const api = new Api(configApi);
+export default api;
