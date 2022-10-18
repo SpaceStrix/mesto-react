@@ -8,7 +8,6 @@ function Main(props) {
   const [userAvatar, setUserAvatar] = useState("https://i.gifer.com/YFcY.gif");
   const [cards, setCards] = useState([]);
 
-    console.log(cards[0])
   useEffect(() => {
     api
       .getInitialData()
