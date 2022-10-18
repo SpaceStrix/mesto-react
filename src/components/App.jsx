@@ -5,7 +5,7 @@ import PopupWithForm from "./PopupWithForm";
 import EditProfile from "./EditProfilePopup";
 import EditProfileAvatar from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 function App() {
   // useState

@@ -1,11 +1,29 @@
 import React, { useState, useEffect } from "react";
-import avatar from "../images/avatar.jpg";
+import Card from "./Card";
 import api from "../utils/Api";
 
 function Main(props) {
   const [userName, setUserName] = useState("Name");
   const [userDescription, setUserDescription] = useState("userDescription");
   const [userAvatar, setUserAvatar] = useState("https://i.gifer.com/YFcY.gif");
+  const [cards, setCards] = useState([]);
+
+    console.log(cards[0])
+  useEffect(() => {
+    api
+      .getInitialData()
+      .then(([getDataCard, getDataUserInfo]) => {
+          //get data profile
+        setUserName(getDataUserInfo.name);
+        setUserDescription(getDataUserInfo.about);
+        setUserAvatar(getDataUserInfo.avatar);
+            //get data card
+        setCards(getDataCard);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  },[]);
 
   return (
     <main className="content">
@@ -36,7 +54,12 @@ function Main(props) {
           onClick={props.onAddPlace}
         ></button>
       </section>
-      <section className="elements"></section>
+      <section className="elements">
+          {cards.map(card=> {
+              return( <Card card={card} key={card._id}/>)
+          })}
+
+      </section>
     </main>
   );
 }
