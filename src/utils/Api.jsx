@@ -1,4 +1,4 @@
-import { configApi } from "./constants";
+import { configApi } from "./utils";
 
 class Api {
   #onResponse(response) {
