@@ -1,5 +1,3 @@
-import { configApi } from "./utils";
-
 class Api {
   #onResponse(response) {
     if (response.ok) {
@@ -90,6 +88,14 @@ class Api {
     return Promise.all([this.getAllCard(), this.getUserInfoFromServer()]);
   }
 }
+
+export const configApi = {
+  url: "https://mesto.nomoreparties.co/v1/cohort-51",
+  headers: {
+    "content-type": "application/json",
+    Authorization: "662f9b88-9df7-4d94-b426-3c935e9f3363",
+  },
+};
 
 const api = new Api(configApi);
 export default api;

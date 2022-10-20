@@ -13,9 +13,9 @@
 - Реализована валидация форм.
 - Popup окна.
 
-## Посмотреть работу
+<!-- ## Посмотреть работу -->
 
-[Клац](https://spacestrix.github.io/mesto/)
+<!-- [Клац](https://spacestrix.github.io/mesto/) -->
 
 ## Используемые языки и технологии
 
@@ -26,7 +26,3 @@
 ![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black)
 ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-
-## Screenshots
-
-![App Screenshot](./images/screenshots/Screenshots.png)
