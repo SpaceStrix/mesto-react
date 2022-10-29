@@ -1,43 +1,35 @@
 import React, { useState, useEffect, useContext } from "react";
 import Card from "./Card";
-import api from "../utils/api";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-const Main = ({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) => {
-  const userContex = useContext(CurrentUserContext);
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    api
-      .getAllCard()
-      .then(dataCard => {
-        setCards(dataCard);
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  }, []);
-
+const Main = ({
+  onEditAvatar,
+  onEditProfile,
+  onAddPlace,
+  onCardClick,
+  cards,
+}) => {
+  const currentUser = useContext(CurrentUserContext);
   return (
     <main className="content">
       <section className="profile">
         <div className="profile__person">
           <button className="profile__avatar" onClick={onEditAvatar}>
             <img
-              src={userContex.avatar}
+              src={currentUser.avatar}
               alt="avatar"
               className="profile__avatar-img"
             />
           </button>
           <div className="profile__info">
-            <h1 className="profile__name">{userContex.name}</h1>
+            <h1 className="profile__name">{currentUser.name}</h1>
             <button
               className="profile__edit"
               type="button"
               aria-label="Кнопка редактирования профиля"
               onClick={onEditProfile}
             ></button>
-            <p className="profile__job">{userContex.about}</p>
+            <p className="profile__job">{currentUser.about}</p>
           </div>
         </div>
         <button

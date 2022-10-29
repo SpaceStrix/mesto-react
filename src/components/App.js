@@ -17,11 +17,14 @@ const App = () => {
   const [selectedCard, setSelectedCard] = useState({});
 
   const [currentUser, setCurrentUser] = useState({});
+  const [cards, setCards] = useState([]);
+
   useEffect(() => {
     api
-      .getUserInfoFromServer()
-      .then(dataUser => {
-        setCurrentUser(dataUser);
+      .getInitialData()
+      .then(([getDataCard, getDataUserInfo]) => {
+        setCurrentUser(getDataUserInfo);
+        setCards(getDataCard);
       })
       .catch(err => {
         console.error(err);
@@ -59,6 +62,7 @@ const App = () => {
           onEditAvatar={handleEditAvatarClick}
           onAddPlace={handleAddPlaceClick}
           onCardClick={handleCardClick}
+          cards={cards}
         />
         <Footer />
         <PopupWithForm
