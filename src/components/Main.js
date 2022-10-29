@@ -1,22 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Card from "./Card";
 import api from "../utils/api";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 
 const Main = ({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) => {
-  const [userName, setUserName] = useState("Name");
-  const [userDescription, setUserDescription] = useState("userDescription");
-  const [userAvatar, setUserAvatar] = useState("https://i.gifer.com/YFcY.gif");
+  const userContex = useContext(CurrentUserContext);
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
     api
-      .getInitialData()
-      .then(([getDataCard, getDataUserInfo]) => {
-        setUserName(getDataUserInfo.name);
-        setUserDescription(getDataUserInfo.about);
-        setUserAvatar(getDataUserInfo.avatar);
-
-        setCards(getDataCard);
+      .getAllCard()
+      .then(dataCard => {
+        setCards(dataCard);
       })
       .catch(err => {
         console.error(err);
@@ -29,20 +24,20 @@ const Main = ({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) => {
         <div className="profile__person">
           <button className="profile__avatar" onClick={onEditAvatar}>
             <img
-              src={userAvatar}
+              src={userContex.avatar}
               alt="avatar"
               className="profile__avatar-img"
             />
           </button>
           <div className="profile__info">
-            <h1 className="profile__name">{userName}</h1>
+            <h1 className="profile__name">{userContex.name}</h1>
             <button
               className="profile__edit"
               type="button"
               aria-label="Кнопка редактирования профиля"
               onClick={onEditProfile}
             ></button>
-            <p className="profile__job">{userDescription}</p>
+            <p className="profile__job">{userContex.about}</p>
           </div>
         </div>
         <button
