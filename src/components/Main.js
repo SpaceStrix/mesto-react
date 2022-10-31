@@ -8,6 +8,7 @@ const Main = ({
   onAddPlace,
   onCardClick,
   cards,
+  onCardLike,
 }) => {
   const currentUser = useContext(CurrentUserContext);
   return (
@@ -41,7 +42,14 @@ const Main = ({
       </section>
       <section className="elements">
         {cards.map(card => {
-          return <Card card={card} key={card._id} onCardClick={onCardClick} />;
+          return (
+            <Card
+              card={card}
+              key={card._id}
+              onCardClick={onCardClick}
+              onCardLike={onCardLike}
+            />
+          );
         })}
       </section>
     </main>

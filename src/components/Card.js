@@ -1,11 +1,15 @@
 import React, { useContext } from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-const Card = ({ card, onCardClick }) => {
+const Card = ({ card, onCardClick, onCardLike }) => {
   const currentUser = useContext(CurrentUserContext);
 
   const handleClick = () => {
     onCardClick(card.link);
+  };
+
+  const handleLikeCard = () => {
+    return onCardLike(card);
   };
 
   //Delete icon
@@ -39,6 +43,7 @@ const Card = ({ card, onCardClick }) => {
             className={cardLikeButtonClassName}
             type="button"
             aria-label="Кнопка лайка"
+            onClick={handleLikeCard}
           />
           <p className="element__like-counter">{card.likes.length}</p>
         </div>
