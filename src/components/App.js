@@ -31,15 +31,6 @@ const App = () => {
       });
   }, []);
 
-  const handleCardLike = card => {
-    const isLiked = card.likes.some(
-      whoLiked => whoLiked._id === currentUser._id
-    );
-    api.toggleLike(card._id, isLiked).then(newCard => {
-      setCards(state => state.map(c => (c._id === card._id ? newCard : c)));
-    });
-  };
-
   // =========================================
   // callback open
   const handleEditAvatarClick = () => {
@@ -62,6 +53,21 @@ const App = () => {
     setSelectedCard({});
   };
 
+  const handleCardLike = card => {
+    const isLiked = card.likes.some(
+      whoLiked => whoLiked._id === currentUser._id
+    );
+    api.toggleLike(card._id, isLiked).then(newCard => {
+      setCards(state => state.map(c => (c._id === card._id ? newCard : c)));
+    });
+  };
+
+  const handleCardDelete = card => {
+    api.removeCard(card._id).then(() => {
+      setCards(state => state.filter(c => c._id !== card._id));
+    });
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <>
@@ -73,6 +79,7 @@ const App = () => {
           onCardClick={handleCardClick}
           cards={cards}
           onCardLike={handleCardLike}
+          onCardDelete={handleCardDelete}
         />
         <Footer />
         <PopupWithForm

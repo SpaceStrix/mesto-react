@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-import Card from "./Card";
+import React, { useContext } from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
+import Card from "./Card";
 
 const Main = ({
   onEditAvatar,
@@ -9,6 +9,7 @@ const Main = ({
   onCardClick,
   cards,
   onCardLike,
+  onCardDelete,
 }) => {
   const currentUser = useContext(CurrentUserContext);
   return (
@@ -48,6 +49,7 @@ const Main = ({
               key={card._id}
               onCardClick={onCardClick}
               onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
             />
           );
         })}

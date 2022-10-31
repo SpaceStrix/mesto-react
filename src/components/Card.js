@@ -1,16 +1,12 @@
 import React, { useContext } from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-const Card = ({ card, onCardClick, onCardLike }) => {
+const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
   const currentUser = useContext(CurrentUserContext);
 
-  const handleClick = () => {
-    onCardClick(card.link);
-  };
-
-  const handleLikeCard = () => {
-    return onCardLike(card);
-  };
+  const handleClick = () => onCardClick(card.link);
+  const handleLikeCard = () => onCardLike(card);
+  const handleCardDelete = () => onCardDelete(card);
 
   //Delete icon
   const isOwn = card.owner._id === currentUser._id;
@@ -29,6 +25,7 @@ const Card = ({ card, onCardClick, onCardLike }) => {
         className={cardDeleteButtonClassName}
         type="button"
         aria-label="Кнопка удаления карточки"
+        onClick={handleCardDelete}
       />
       <img
         src={card.link}
