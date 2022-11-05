@@ -8,6 +8,7 @@ import ImagePopup from "./ImagePopup";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 
 import api from "../utils/api";
 
@@ -47,39 +48,60 @@ const App = () => {
   const handleCardClick = link => {
     setSelectedCard(link);
   };
-
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setSelectedCard({});
   };
-
   const handleCardLike = card => {
     const isLiked = card.likes.some(
       whoLiked => whoLiked._id === currentUser._id
     );
-    api.toggleLike(card._id, isLiked).then(newCard => {
-      setCards(state => state.map(c => (c._id === card._id ? newCard : c)));
-    });
+    api
+      .toggleLike(card._id, isLiked)
+      .then(newCard => {
+        setCards(state => state.map(c => (c._id === card._id ? newCard : c)));
+      })
+      .catch(err => {
+        console.error(err);
+      });
   };
-
   const handleCardDelete = card => {
-    api.removeCard(card._id).then(() => {
-      setCards(state => state.filter(c => c._id !== card._id));
-    });
+    api
+      .removeCard(card._id)
+      .then(() => {
+        setCards(state => state.filter(c => c._id !== card._id));
+      })
+      .catch(err => {
+        console.error(err);
+      });
   };
-
   const handleUpdateUser = newData => {
     api.setNewUserInfo(newData).then(data => {
       setCurrentUser(data);
     });
   };
-
   const handleUpdateAvatar = newUrl => {
-    api.setNewAvatar(newUrl).then(data => {
-      setCurrentUser(data);
-    });
+    api
+      .setNewAvatar(newUrl)
+      .then(data => {
+        setCurrentUser(data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
+  const handleAddPlaceSubmit = newCard => {
+    api
+      .addNewCardToServer(newCard)
+      .then(data => {
+        setCards([data, ...cards]);
+      })
+      .catch(err => {
+        console.error(err);
+      });
   };
 
   return (
@@ -107,41 +129,12 @@ const App = () => {
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
         />
-
-        <PopupWithForm
+        <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
-          name={"element"}
-          title={"Новое место"}
-          btnText={"Создать"}
-        >
-          <label className="popup__label">
-            <input
-              type="text"
-              name="name"
-              id="popup__title-input"
-              className="popup__input"
-              placeholder="Название"
-              minLength={2}
-              maxLength={40}
-              required=""
-            />
-            <span className="popup__title-input-error popup__input-error" />
-          </label>
-          <label className="popup__label">
-            <input
-              type="url"
-              name="link"
-              id="popup__url-input"
-              className="popup__input"
-              placeholder="Укажите ссылку"
-              minLength={2}
-              maxLength={200}
-              required=""
-            />
-            <span className="popup__url-input-error popup__input-error" />
-          </label>
-        </PopupWithForm>
+          onAddPlace={handleAddPlaceSubmit}
+        />
+
         <PopupWithForm title={"Вы уверены ?"} btnText={"Да"}></PopupWithForm>
         <ImagePopup
           card={selectedCard}
