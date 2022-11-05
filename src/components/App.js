@@ -69,9 +69,9 @@ const App = () => {
     });
   };
 
-  const handleUpdateUser = () => {
-    api.editProfile.then(data => {
-      console.log(data);
+  const handleUpdateUser = newData => {
+    api.setNewUserInfo(newData).then(data => {
+      setCurrentUser(data);
     });
   };
 

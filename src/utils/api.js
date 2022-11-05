@@ -50,7 +50,7 @@ class Api {
     });
   }
   //b редактирование профиля
-  editProfile({ name, about }) {
+  setNewUserInfo({ name, about }) {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: this._headers,
