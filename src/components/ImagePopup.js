@@ -26,5 +26,4 @@ const ImagePopup = ({ card, name, onClose, onCardClick }) => {
     </div>
   );
 };
-
 export default ImagePopup;
