@@ -11,7 +11,7 @@ const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
       cardUrlRef.current.value = "";
       cardTitleRef.current.value = "";
     }
-  });
+  }, [isOpen]);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -20,9 +20,6 @@ const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
       link: cardUrlRef.current.value,
       name: cardTitleRef.current.value,
     });
-
-    e.target.reset();
-    onClose();
   };
 
   return (

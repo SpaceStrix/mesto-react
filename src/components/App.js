@@ -13,7 +13,6 @@ import AddPlacePopup from "./AddPlacePopup";
 import api from "../utils/api";
 
 const App = () => {
-  // useState
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -30,8 +29,7 @@ const App = () => {
       })
       .catch(err => {
         console.error(err);
-      })
-      .finally();
+      });
   }, []);
 
   // =========================================
@@ -54,6 +52,7 @@ const App = () => {
     setIsAddPlacePopupOpen(false);
     setSelectedCard({});
   };
+
   const handleCardLike = card => {
     const isLiked = card.likes.some(
       whoLiked => whoLiked._id === currentUser._id
@@ -78,9 +77,17 @@ const App = () => {
       });
   };
   const handleUpdateUser = newData => {
-    api.setNewUserInfo(newData).then(data => {
-      setCurrentUser(data);
-    });
+    api
+      .setNewUserInfo(newData)
+      .then(data => {
+        setCurrentUser(data);
+      })
+      .catch(err => {
+        console.error(err);
+      })
+      .finally(() => {
+        closeAllPopups();
+      });
   };
   const handleUpdateAvatar = newUrl => {
     api
@@ -90,9 +97,11 @@ const App = () => {
       })
       .catch(err => {
         console.error(err);
+      })
+      .finally(() => {
+        closeAllPopups();
       });
   };
-
   const handleAddPlaceSubmit = newCard => {
     api
       .addNewCardToServer(newCard)
@@ -101,6 +110,9 @@ const App = () => {
       })
       .catch(err => {
         console.error(err);
+      })
+      .finally(() => {
+        closeAllPopups();
       });
   };
 

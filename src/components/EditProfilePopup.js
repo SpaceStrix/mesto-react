@@ -15,10 +15,11 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
   };
 
   const currentUser = useContext(CurrentUserContext);
+
   useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, isOpen]);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -27,8 +28,6 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
       name,
       about: description,
     });
-
-    onClose();
   };
 
   return (
