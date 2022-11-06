@@ -6,7 +6,7 @@ const ImagePopup = ({ card, name, onClose, onCardClick }) => {
       <div className="img-container">
         <figure className="img-container__block">
           <img
-            src={card}
+            src={card.link}
             alt="Тут должно быть изображение"
             className="img-container__img"
             onClick={onCardClick}

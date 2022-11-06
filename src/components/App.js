@@ -115,7 +115,6 @@ const App = () => {
         closeAllPopups();
       });
   };
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <>

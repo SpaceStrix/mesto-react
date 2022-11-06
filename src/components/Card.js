@@ -3,8 +3,7 @@ import CurrentUserContext from "../contexts/CurrentUserContext";
 
 const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
   const currentUser = useContext(CurrentUserContext);
-
-  const handleClick = () => onCardClick(card.link);
+  const handleClick = () => onCardClick(card);
   const handleLikeCard = () => onCardLike(card);
   const handleCardDelete = () => onCardDelete(card);
 
