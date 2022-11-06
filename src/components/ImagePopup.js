@@ -10,6 +10,9 @@ const ImagePopup = ({ card, name, onClose, onCardClick }) => {
             alt="Тут должно быть изображение"
             className="img-container__img"
             onClick={onCardClick}
+            onError={e => {
+              e.target.src = require("../images/defaultIMG.png");
+            }}
           />
           <figcaption className="img-container__title">{card.name}</figcaption>
         </figure>
