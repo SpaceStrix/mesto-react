@@ -32,6 +32,9 @@ const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
         alt={card.name}
         className="element__img"
         onClick={handleClick}
+        onError={e => {
+          e.target.src = require("../images/defaultIMG.png");
+        }}
       />
       <div className="element__title-group">
         <h2 className="element__title">{card.name}</h2>

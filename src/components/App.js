@@ -18,7 +18,6 @@ const App = () => {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
-
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
 
@@ -31,7 +30,8 @@ const App = () => {
       })
       .catch(err => {
         console.error(err);
-      });
+      })
+      .finally();
   }, []);
 
   // =========================================
@@ -134,13 +134,13 @@ const App = () => {
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
         />
-
-        <PopupWithForm title={"Вы уверены ?"} btnText={"Да"}></PopupWithForm>
         <ImagePopup
           card={selectedCard}
           onClose={closeAllPopups}
           name={"image"}
         />
+
+        <PopupWithForm title={"Вы уверены ?"} btnText={"Да"}></PopupWithForm>
       </>
     </CurrentUserContext.Provider>
   );

@@ -1,10 +1,17 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 
 import PopupWithForm from "./PopupWithForm";
 
 const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
   const cardTitleRef = useRef();
   const cardUrlRef = useRef();
+
+  useEffect(() => {
+    if (isOpen) {
+      cardUrlRef.current.value = "";
+      cardTitleRef.current.value = "";
+    }
+  });
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -36,7 +43,7 @@ const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
           placeholder="Название"
           minLength={2}
           maxLength={40}
-          required=""
+          required
           ref={cardTitleRef}
         />
         <span className="popup__title-input-error popup__input-error" />
@@ -50,7 +57,7 @@ const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
           placeholder="Укажите ссылку"
           minLength={2}
           maxLength={200}
-          required=""
+          required
           ref={cardUrlRef}
         />
         <span className="popup__url-input-error popup__input-error" />
